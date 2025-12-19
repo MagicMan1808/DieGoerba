@@ -38,36 +38,23 @@ auf Basis von HTML, CSS und JavaScript.
 ---
 
 ## Projektstruktur
+```
 DieGoerba/
-
 |__index.html
-
 |__css/
-
 |  |__style.css
-
 |
-
 |__js/
-
 |  |__main.js
-
 |
-
 |__ assets/
-
 |  |__images/
-
 |
-
 |__docs/
-
 |  |__assignment10.pdf
-
 |
-
 |__README.md
-
+```
 
 ---
 
