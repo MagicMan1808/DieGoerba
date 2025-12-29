@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Feedback System – DieGoerba</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Script -->
+    <script src="js/main.js" defer></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header>
+        <h1>Course Feedback System</h1>
+        <p>Anonymes Feedback für Universitätsveranstaltungen</p>
+    </header>
+
+    <!-- ================= STARTSEITE ================= -->
+    <main id="start-screen">
+        <h2>Willkommen</h2>
+        <p>Bitte wählen Sie, wie Sie fortfahren möchten:</p>
+
+        <div class="button-group">
+            <button onclick="showStudentView()">Feedback abgeben (Studierende)</button>
+            <button onclick="showLecturerView()">Dashboard (Lehrende)</button>
+        </div>
+    </main>
+
+    <!-- ================= STUDENTENANSICHT ================= -->
+    <main id="student-view" class="hidden">
+        <h2>Feedback zur heutigen Sitzung</h2>
+        <p><strong>Hinweis:</strong> Dein Feedback ist vollständig anonym.</p>
+
+        <!-- Frage 1 -->
+        <div class="question">
+            <label>Wie gut konnten Sie dem Inhalt folgen?</label>
+            <select id="q1">
+                <option value="">Bitte auswählen</option>
+                <option value="1">1 – sehr schlecht</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 – sehr gut</option>
+            </select>
+        </div>
+
+        <!-- Frage 2 -->
+        <div class="question">
+            <label>Wie verständlich wurden die Inhalte erklärt?</label>
+            <select id="q2">
+                <option value="">Bitte auswählen</option>
+                <option value="1">1 – gar nicht verständlich</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 – sehr verständlich</option>
+            </select>
+        </div>
+
+        <!-- Emoji Feedback -->
+        <div class="question" id="emoji-question">
+            <label>Wie war Ihre allgemeine Stimmung?</label>
+            <div class="emoji-group" id="emoji-group">
+                <span data-value="1">😡</span>
+                <span data-value="2">😕</span>
+                <span data-value="3">😐</span>
+                <span data-value="4">😊</span>
+                <span data-value="5">😁</span>
+            </div>
+        </div>
+
+        <!-- Freitext -->
+        <div class="question">
+            <label>Optionales Feedback</label>
+            <textarea placeholder="Was hat Ihnen gefallen oder gefehlt?"></textarea>
+        </div>
+
+        <button onclick="submitFeedback()">
+            Feedback absenden
+        </button>
+    </main>
+
+    <!-- ================= DANKE-SEITE ================= -->
+    <main id="thank-you" class="hidden">
+        <div class="loader"></div>
+        <h2 id="thank-title">Feedback wird verarbeitet …</h2>
+        <p id="thank-text">Bitte einen Moment Geduld</p>
+
+        <button onclick="showStart()" class="hidden" id="back-btn">
+            Zurück zur Startseite
+        </button>
+    </main>
+
+    <!-- ================= LEHRENDEN-DASHBOARD ================= -->
+    <main id="lecturer-view" class="hidden">
+        <h2>Live‑Dashboard</h2>
+        <p>Aktuelle Rückmeldungen zur laufenden Session</p>
+
+        <div class="dashboard">
+            <div class="card">
+                <h3>Durchschnittliches Verständnis</h3>
+                <p>4.1 / 5</p>
+            </div>
+
+            <div class="card">
+                <h3>Stimmung</h3>
+                <p>😊 Positiv</p>
+            </div>
+
+            <div class="card">
+                <h3>Teilnahmen</h3>
+                <p>63 Studierende</p>
+            </div>
+        </div>
+
+        <div class="card chart-card" onclick="openChart()">
+            <h3>Antwortverteilung</h3>
+            <canvas id="feedbackChart" width="200" height="150"></canvas>
+            <p class="hint">Zum Vergrößern klicken</p>
+        </div>
+
+        <div class="card chart-card" onclick="openScaleChart()">
+            <h3>Bewertung (Skala 1–5)</h3>
+            <canvas id="scaleChart" width="200" height="150"></canvas>
+            <p class="hint">Zum Vergrößern klicken</p>
+        </div>
+
+
+
+        <button onclick="showStart()">Session beenden</button>
+    </main>
+
+    <div id="chart-overlay" class="hidden">
+        <div class="overlay-content">
+            <button class="close-btn" onclick="closeChart()">✕</button>
+            <h2>Antwortverteilung – Details</h2>
+            <canvas id="feedbackChartLarge"></canvas>
+        </div>
+    </div>
+
+    <div id="scale-chart-overlay" class="hidden">
+        <div class="overlay-content">
+            <button class="close-btn" onclick="closeScaleChart()">✕</button>
+            <h2>Bewertungen – Skala 1 bis 5</h2>
+            <canvas id="scaleChartLarge"></canvas>
+        </div>
+    </div>
+
+
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <p>GMCI – Assignment 10 · DieGoerba</p>
+    </footer>
+
+</body>
+</html>

@@ -67,7 +67,7 @@ DieGoerba/
 ---
 
 ## Team
-- Yousef Mahmuod El-Jarousha 
+- Yousef Mahmuod El-Jarousha (MagicMan1808)
 - Serdar Güney
 - Laith Al-Rifai
 - Mohamad Yehia
