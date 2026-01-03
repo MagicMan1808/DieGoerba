@@ -47,8 +47,8 @@ DieGoerba/
 |__js/
 |  |__main.js
 |
-|__ assets/
-|  |__images/
+|__sounds/
+|  |__submit.wav
 |
 |__docs/
 |  |__assignment10.pdf

@@ -61,8 +61,11 @@ function submitFeedback() {
     alert("Bitte fülle alle Pflichtfelder aus.");
     return;
   }
+  
+  const sound = document.getElementById("submit-sound");
+  sound.currentTime = 0;
+  sound.play();
 
-  // ✅ alles ok
   hideAllViews();
   document.getElementById("thank-you").classList.remove("hidden");
 
@@ -78,7 +81,7 @@ function submitFeedback() {
     title.textContent = "Vielen Dank für dein Feedback ✓";
     text.textContent = "Deine Rückmeldung wurde erfolgreich gespeichert.";
     button.classList.remove("hidden");
-  }, 3000);
+  }, 5000);
 }
 
 // ===============================
