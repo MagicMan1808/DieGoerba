@@ -68,10 +68,10 @@ DieGoerba/
 
 ## Team
 - Yousef Mahmuod El-Jarousha (MagicMan1808)
-- Serdar Güney
-- Laith Al-Rifai
-- Mohamad Yehia
-- Anas Al Zarai
+- Serdar Güney (SerdarG28)
+- Laith Al-Rifai (Shift077)
+- Mohamad Yehia (moha0824)
+- Anas Al Zarai (Endoskelly)
 
 ---
 
