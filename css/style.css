@@ -284,6 +284,7 @@ textarea {
     border-top: 6px solid #3498db;
     border-radius: 50%;
     animation: spin 1s linear infinite;
+    transition: opacity 0.4s ease;
 }
 
 @keyframes spin {

@@ -17,6 +17,13 @@ function showStart() {
 function showStudentView() {
     hideAllViews();
     document.getElementById("student-view").classList.remove("hidden");
+
+    const loader = document.getElementById("loader");
+    if (loader) {
+        loader.style.animation = "none";
+        loader.offsetHeight;
+        loader.style.animation = "spin 1s linear infinite";
+    }
 }
 
 function showLecturerView() {
@@ -30,6 +37,9 @@ function showLecturerView() {
 
 
 function submitFeedback() {
+const loader = document.getElementById("loader");
+loader.style.display = "block";
+
  const q1 = document.getElementById("q1");
  const q2 = document.getElementById("q2");
  const emojiGroup = document.getElementById("emoji-group");
@@ -78,6 +88,8 @@ function submitFeedback() {
   button.classList.add("hidden");
 
   setTimeout(() => {
+    document.getElementById("loader").style.display = "none";
+
     title.textContent = "Vielen Dank für dein Feedback ✓";
     text.textContent = "Deine Rückmeldung wurde erfolgreich gespeichert.";
     button.classList.remove("hidden");
