@@ -189,7 +189,8 @@ textarea {
 ===================== */
 
 #chart-overlay,
-#scale-chart-overlay {
+#scale-chart-overlay,
+#scale-chart-overlay-b {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.6);
@@ -200,7 +201,8 @@ textarea {
 }
 
 #chart-overlay.active,
-#scale-chart-overlay.active {
+#scale-chart-overlay.active,
+#scale-chart-overlay-b.active {
     display: flex;
 }
 

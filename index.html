@@ -120,19 +120,26 @@
             </div>
         </div>
 
-        <div class="card chart-card" onclick="openChart()">
-            <h3>Antwortverteilung</h3>
+        <!-- Skala Diagramm 1 -->
+        <div class="card chart-card" onclick="openScaleChart()">
+            <h3>Bewertung Skala 1–5 (A)</h3>
+            <canvas id="scaleChartA" width="200" height="150"></canvas>
+            <p class="hint">Zum Vergrößern klicken</p>
+        </div>
+
+        <!-- Skala Diagramm 2 -->
+        <div class="card chart-card" onclick="openScaleChartB()">
+            <h3>Bewertung Skala 1–5 (B)</h3>
+            <canvas id="scaleChartB" width="200" height="150"></canvas>
+            <p class="hint">Zum Vergrößern klicken</p>
+        </div>
+
+        <!-- Emoji Diagramm -->
+        <div class="card chart-card" onclick="openEmojiChart()">
+            <h3>Emoji‑Feedback</h3>
             <canvas id="feedbackChart" width="200" height="150"></canvas>
             <p class="hint">Zum Vergrößern klicken</p>
         </div>
-
-        <div class="card chart-card" onclick="openScaleChart()">
-            <h3>Bewertung (Skala 1–5)</h3>
-            <canvas id="scaleChart" width="200" height="150"></canvas>
-            <p class="hint">Zum Vergrößern klicken</p>
-        </div>
-
-
 
         <button onclick="showStart()">Session beenden</button>
     </main>
@@ -152,6 +159,15 @@
             <canvas id="scaleChartLarge"></canvas>
         </div>
     </div>
+
+    <div id="scale-chart-overlay-b" class="hidden">
+        <div class="overlay-content">
+            <button class="close-btn" onclick="closeScaleChartB()">✕</button>
+            <h2>Bewertungen – Skala 1 bis 5 (B)</h2>
+            <canvas id="scaleChartLargeB"></canvas>
+        </div>
+    </div>
+
 
 
 

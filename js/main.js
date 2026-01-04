@@ -150,48 +150,79 @@ function createCharts() {
     );
 }
 
-let scaleChartSmall, scaleChartLarge;
+let scaleChartA, scaleChartB, scaleChartLargeA, scaleChartLargeB;
 
 function createScaleCharts() {
-    const scaleData = {
+
+    const dataA = {
         labels: ["1", "2", "3", "4", "5"],
-        datasets: [
-            {
-                label: "Anzahl Antworten",
-                data: [2, 5, 11, 29, 16], // simulierte Daten
-                backgroundColor: "#2ecc71"
-            }
-        ]
+        datasets: [{
+            label: "Skala A",
+            data: [2, 5, 11, 29, 16],
+            backgroundColor: "#2ecc71"
+        }]
     };
 
-    scaleChartSmall = new Chart(
-        document.getElementById("scaleChart"),
+    const dataB = {
+        labels: ["1", "2", "3", "4", "5"],
+        datasets: [{
+            label: "Skala B",
+            data: [1, 4, 9, 31, 18],
+            backgroundColor: "#e67e22"
+        }]
+    };
+
+    // 🔹 Kleine Charts
+    scaleChartA = new Chart(
+        document.getElementById("scaleChartA"),
         {
             type: "bar",
-            data: scaleData,
+            data: dataA,
             options: {
                 plugins: { legend: { display: false } },
-                scales: {
-                    y: { beginAtZero: true }
-                }
+                scales: { y: { beginAtZero: true } }
             }
         }
     );
 
-    scaleChartLarge = new Chart(
+    scaleChartB = new Chart(
+        document.getElementById("scaleChartB"),
+        {
+            type: "bar",
+            data: dataB,
+            options: {
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true } }
+            }
+        }
+    );
+
+    // 🔹 Große Charts (Overlay)
+    scaleChartLargeA = new Chart(
         document.getElementById("scaleChartLarge"),
         {
             type: "bar",
-            data: scaleData,
+            data: dataA,
             options: {
                 responsive: true,
-                scales: {
-                    y: { beginAtZero: true }
-                }
+                scales: { y: { beginAtZero: true } }
+            }
+        }
+    );
+
+    scaleChartLargeB = new Chart(
+        document.getElementById("scaleChartLargeB"),
+        {
+            type: "bar",
+            data: dataB,
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
             }
         }
     );
 }
+
 
 let selectedEmoji = null;
 
@@ -204,6 +235,18 @@ function closeScaleChart() {
     document.getElementById("scale-chart-overlay").classList.remove("active");
 }
 
+function openScaleChartB() {
+    document.getElementById("scale-chart-overlay-b").classList.add("active");
+}
+
+function closeScaleChartB() {
+    document.getElementById("scale-chart-overlay-b").classList.remove("active");
+}
+
+function openEmojiChart() {
+    document.getElementById("chart-overlay").classList.add("active");
+}
+
 function openChart() {
     document.getElementById("chart-overlay").classList.add("active");
 }
@@ -213,6 +256,6 @@ function closeChart() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    createCharts();
     createScaleCharts();
+    createCharts();
 });
