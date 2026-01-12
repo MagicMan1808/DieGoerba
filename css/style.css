@@ -89,6 +89,64 @@ button:hover {
     margin-top: 1.5rem;
 }
 
+/* Inline Fehlertexte */
+.error-message {
+    display: none;
+    color: #e74c3c;
+    margin-top: 0.4rem;
+    font-size: 0.9rem;
+}
+.error-message.active {
+    display: block;
+}
+
+/* Hinweis zur Anonymität */
+.privacy-note {
+    background: #eef6ff;
+    border: 1px solid #cfe4ff;
+    color: #2459a6;
+    padding: 0.6rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+/* Dashboard Hilfe */
+.help-section {
+    margin: 1rem 0;
+}
+.help-section summary {
+    cursor: pointer;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Confirmation Overlay */
+#confirm-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+#confirm-overlay.active {
+    display: flex;
+}
+
+/* Pflichtfeld-Fehler */
+.invalid {
+    border: 2px solid #e74c3c !important;
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.12);
+}
+
+.emoji-invalid {
+    outline: 2px solid #e74c3c;
+    border-radius: 8px;
+    padding: 4px;
+}
+
 /* =====================
    QUESTIONS & INPUTS
 ===================== */

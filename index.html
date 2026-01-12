@@ -33,15 +33,15 @@
         </div>
     </main>
 
-    <!-- ================= STUDENTENANSICHT ================= -->
+     <!-- ================= STUDENTENANSICHT ================= -->
     <main id="student-view" class="hidden">
         <h2>Feedback zur heutigen Sitzung</h2>
-        <p><strong>Hinweis:</strong> Dein Feedback ist vollständig anonym.</p>
+        <p class="privacy-note"><strong>Hinweis:</strong> Dein Feedback ist vollständig anonym. Es werden keine persönlichen Daten gespeichert.</p>
 
         <!-- Frage 1 -->
         <div class="question">
             <label>Wie gut konnten Sie dem Inhalt folgen?</label>
-            <select id="q1">
+            <select id="q1" aria-describedby="q1-error">
                 <option value="">Bitte auswählen</option>
                 <option value="1">1 – sehr schlecht</option>
                 <option value="2">2</option>
@@ -49,12 +49,13 @@
                 <option value="4">4</option>
                 <option value="5">5 – sehr gut</option>
             </select>
+            <small id="q1-error" class="error-message" role="alert" aria-live="polite"></small>
         </div>
 
         <!-- Frage 2 -->
         <div class="question">
             <label>Wie verständlich wurden die Inhalte erklärt?</label>
-            <select id="q2">
+            <select id="q2" aria-describedby="q2-error">
                 <option value="">Bitte auswählen</option>
                 <option value="1">1 – gar nicht verständlich</option>
                 <option value="2">2</option>
@@ -62,28 +63,30 @@
                 <option value="4">4</option>
                 <option value="5">5 – sehr verständlich</option>
             </select>
+            <small id="q2-error" class="error-message" role="alert" aria-live="polite"></small>
         </div>
 
         <!-- Emoji Feedback -->
         <div class="question" id="emoji-question">
             <label>Wie war Ihre allgemeine Stimmung?</label>
-            <div class="emoji-group" id="emoji-group">
-                <span data-value="1">😡</span>
-                <span data-value="2">😕</span>
-                <span data-value="3">😐</span>
-                <span data-value="4">😊</span>
-                <span data-value="5">😁</span>
+            <div class="emoji-group" id="emoji-group" aria-describedby="emoji-error">
+                <span data-value="1" aria-label="Sehr schlecht">😡</span>
+                <span data-value="2" aria-label="Schlecht">😕</span>
+                <span data-value="3" aria-label="Neutral">😐</span>
+                <span data-value="4" aria-label="Gut">😊</span>
+                <span data-value="5" aria-label="Sehr gut">😁</span>
             </div>
+            <small id="emoji-error" class="error-message" role="alert" aria-live="polite"></small>
         </div>
 
         <!-- Freitext -->
         <div class="question">
             <label>Optionales Feedback</label>
-            <textarea placeholder="Was hat Ihnen gefallen oder gefehlt?"></textarea>
+            <textarea id="comments" placeholder="Was hat Ihnen gefallen oder gefehlt?"></textarea>
         </div>
 
         <button onclick="submitFeedback()">
-            Feedback absenden
+            Feedback überprüfen
         </button>
     </main>
 
@@ -103,17 +106,26 @@
         <h2>Live‑Dashboard</h2>
         <p>Aktuelle Rückmeldungen zur laufenden Session</p>
 
+        <details class="help-section">
+            <summary>Kurze Erläuterungen zum Dashboard</summary>
+            <ul>
+                <li><strong>Durchschnittliches Verständnis:</strong> Mittelwert der Skala 1–5 aus Frage 1.</li>
+                <li><strong>Stimmung:</strong> Aggregierte Emoji‑Rückmeldungen von negativ bis positiv.</li>
+                <li><strong>Teilnahmen:</strong> Anzahl der eingegangenen Feedbacks.</li>
+                <li><strong>Skala‑Diagramme:</strong> Verteilung der Bewertungen 1–5 (zum Vergrößern klicken).</li>
+                <li><strong>Emoji‑Diagramm:</strong> Häufigkeit der Stimmungs‑Emojis (zum Vergrößern klicken).</li>
+            </ul>
+        </details>
+
         <div class="dashboard">
             <div class="card">
                 <h3>Durchschnittliches Verständnis</h3>
                 <p>4.1 / 5</p>
             </div>
-
             <div class="card">
                 <h3>Stimmung</h3>
                 <p>😊 Positiv</p>
             </div>
-
             <div class="card">
                 <h3>Teilnahmen</h3>
                 <p>63 Studierende</p>
@@ -165,6 +177,21 @@
             <button class="close-btn" onclick="closeScaleChartB()">✕</button>
             <h2>Bewertungen – Skala 1 bis 5 (B)</h2>
             <canvas id="scaleChartLargeB"></canvas>
+        </div>
+    </div>
+
+
+    <!-- ================= CONFIRMATION OVERLAY ================= -->
+    <div id="confirm-overlay" class="hidden">
+        <div class="overlay-content">
+            <button class="close-btn" onclick="closeConfirm()">✕</button>
+            <h2>Feedback überprüfen und bestätigen</h2>
+            <div id="confirm-summary"></div>
+            <div class="button-group">
+                <button id="confirm-edit">Korrigieren</button>
+                <button id="confirm-send">Endgültig absenden</button>
+            </div>
+            <p class="privacy-note">Dein Feedback bleibt anonym. Es werden keine personenbezogenen Daten übertragen.</p>
         </div>
     </div>
 

@@ -35,66 +35,129 @@ function showLecturerView() {
 // FEEDBACK SUBMISSION (SIMULATED)
 // ===============================
 
-
 function submitFeedback() {
-const loader = document.getElementById("loader");
-loader.style.display = "block";
+  const q1 = document.getElementById("q1");
+  const q2 = document.getElementById("q2");
+  const emojiGroup = document.getElementById("emoji-group");
+  const comments = document.getElementById("comments");
 
- const q1 = document.getElementById("q1");
- const q2 = document.getElementById("q2");
- const emojiGroup = document.getElementById("emoji-group");
+  const q1Error = document.getElementById("q1-error");
+  const q2Error = document.getElementById("q2-error");
+  const emojiError = document.getElementById("emoji-error");
 
   let hasError = false;
 
-  // 🔄 Reset
+  // Reset visual + messages
   q1.classList.remove("invalid");
   q2.classList.remove("invalid");
   emojiGroup.classList.remove("emoji-invalid");
+  q1Error.textContent = "";
+  q2Error.textContent = "";
+  emojiError.textContent = "";
+  q1Error.classList.remove("active");
+  q2Error.classList.remove("active");
+  emojiError.classList.remove("active");
 
-  // Pflichtfelder prüfen
+  // Pflichtfelder prüfen mit Inline-Fehlern
   if (q1.value === "") {
     q1.classList.add("invalid");
+    q1Error.textContent = "Bitte eine Bewertung (1–5) auswählen.";
+    q1Error.classList.add("active");
     hasError = true;
   }
 
   if (q2.value === "") {
     q2.classList.add("invalid");
+    q2Error.textContent = "Bitte eine Verständlichkeitsbewertung (1–5) auswählen.";
+    q2Error.classList.add("active");
     hasError = true;
   }
 
   if (!selectedEmoji) {
     emojiGroup.classList.add("emoji-invalid");
+    emojiError.textContent = "Bitte eine Stimmung auswählen.";
+    emojiError.classList.add("active");
     hasError = true;
   }
 
   if (hasError) {
-    alert("Bitte fülle alle Pflichtfelder aus.");
-    return;
+    return; // Inline-Fehler anzeigen, kein Alert
   }
-  
-  const sound = document.getElementById("submit-sound");
-  sound.currentTime = 0;
-  sound.play();
 
-  hideAllViews();
-  document.getElementById("thank-you").classList.remove("hidden");
+  // Bestätigungsdialog mit Zusammenfassung
+  const summary = document.getElementById("confirm-summary");
+  const emojiLabelMap = { "1": "😡 Sehr schlecht", "2": "😕 Schlecht", "3": "😐 Neutral", "4": "😊 Gut", "5": "😁 Sehr gut" };
+  const safeComments = (comments?.value || "").replace(/</g, "&lt;");
 
-  const title = document.getElementById("thank-title");
-  const text = document.getElementById("thank-text");
-  const button = document.getElementById("back-btn");
+  summary.innerHTML = `
+    <ul>
+      <li><strong>Inhalt folgen:</strong> ${q1.value} / 5</li>
+      <li><strong>Verständlichkeit:</strong> ${q2.value} / 5</li>
+      <li><strong>Stimmung:</strong> ${emojiLabelMap[String(selectedEmoji)]}</li>
+      <li><strong>Optionales Feedback:</strong> ${safeComments || "—"}</li>
+    </ul>
+  `;
 
-  title.textContent = "Feedback wird verarbeitet …";
-  text.textContent = "Bitte einen Moment Geduld";
-  button.classList.add("hidden");
-
-  setTimeout(() => {
-    document.getElementById("loader").style.display = "none";
-
-    title.textContent = "Vielen Dank für dein Feedback ✓";
-    text.textContent = "Deine Rückmeldung wurde erfolgreich gespeichert.";
-    button.classList.remove("hidden");
-  }, 5000);
+  openConfirm();
 }
+
+function openConfirm() {
+  document.getElementById("confirm-overlay").classList.add("active");
+}
+function closeConfirm() {
+  document.getElementById("confirm-overlay").classList.remove("active");
+}
+// ...existing code...
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Emoji Auswahl
+  const emojis = document.querySelectorAll(".emoji-group span");
+  emojis.forEach(emoji => {
+    emoji.addEventListener("click", () => {
+      emojis.forEach(e => e.style.opacity = "0.4");
+      emoji.style.opacity = "1";
+      selectedEmoji = emoji.dataset.value;
+    });
+  });
+
+  // Bestätigungsdialog Buttons
+  const editBtn = document.getElementById("confirm-edit");
+  const sendBtn = document.getElementById("confirm-send");
+
+  if (editBtn && sendBtn) {
+    editBtn.addEventListener("click", () => {
+      closeConfirm(); // zurück zur Bearbeitung
+    });
+
+    sendBtn.addEventListener("click", () => {
+      closeConfirm();
+
+      const sound = document.getElementById("submit-sound");
+      sound.currentTime = 0;
+      sound.play();
+
+      hideAllViews();
+      document.getElementById("thank-you").classList.remove("hidden");
+
+      const title = document.getElementById("thank-title");
+      const text = document.getElementById("thank-text");
+      const button = document.getElementById("back-btn");
+      const loader = document.getElementById("loader");
+
+      loader.style.display = "block";
+      title.textContent = "Feedback wird verarbeitet …";
+      text.textContent = "Bitte einen Moment Geduld";
+      button.classList.add("hidden");
+
+      setTimeout(() => {
+        loader.style.display = "none";
+        title.textContent = "Vielen Dank für dein Feedback ✓";
+        text.textContent = "Deine Rückmeldung wurde erfolgreich gespeichert.";
+        button.classList.remove("hidden");
+      }, 5000);
+    });
+  }
+});
 
 // ===============================
 // EMOJI SELECTION (VISUAL ONLY)
