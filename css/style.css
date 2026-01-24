@@ -15,6 +15,24 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    transition: background-color 0.4s ease, background 0.4s ease;
+}
+
+/* Hintergrund je Stimmung (farblich passend zum Loader) */
+body.mood-1 { /* 😡 rot */
+    background-color: #f15e4e;
+}
+body.mood-2 { /* 😕 orange */
+    background-color: #faad49;
+}
+body.mood-3 { /* 😐 blau */
+    background-color: #55a0f5;
+}
+body.mood-4 { /* 😊 grün */
+    background-color: #45f390;
+}
+body.mood-5 { /* 😁 violett */
+    background-color: #c549f1;
 }
 
 /* =====================
@@ -351,6 +369,35 @@ textarea {
     to {
         transform: rotate(360deg);
     }
+}
+
+/* NEU: sanfter Puls-Effekt */
+@keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.35); }
+    70%  { box-shadow: 0 0 0 14px rgba(52, 152, 219, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0); }
+}
+
+/* NEU: Loader-Varianten je Stimmung */
+.loader.mood-1 { /* 😡 Frust: schneller, rot */
+    border-top-color: #e74c3c;
+    animation: spin 0.8s linear infinite;
+}
+.loader.mood-2 { /* 😕 Sorge: etwas langsamer, orange */
+    border-top-color: #f39c12;
+    animation: spin 1.2s linear infinite;
+}
+.loader.mood-3 { /* 😐 Neutral: Standard, blau */
+    border-top-color: #3498db;
+    animation: spin 1s linear infinite;
+}
+.loader.mood-4 { /* 😊 Positiv: grün + Puls */
+    border-top-color: #2ecc71;
+    animation: spin 0.9s linear infinite, pulse 2s ease-out infinite;
+}
+.loader.mood-5 { /* 😁 Begeisterung: sehr schnell + starker Puls */
+    border-top-color: #9b59b6;
+    animation: spin 0.7s linear infinite, pulse 1.6s ease-out infinite;
 }
 
 /* Pflichtfeld-Fehler */

@@ -12,11 +12,13 @@ function hideAllViews() {
 function showStart() {
     hideAllViews();
     document.getElementById("start-screen").classList.remove("hidden");
+    clearMood();
 }
 
 function showStudentView() {
     hideAllViews();
     document.getElementById("student-view").classList.remove("hidden");
+    clearMood();
 
     const loader = document.getElementById("loader");
     if (loader) {
@@ -29,6 +31,7 @@ function showStudentView() {
 function showLecturerView() {
     hideAllViews();
     document.getElementById("lecturer-view").classList.remove("hidden");
+    clearMood();
 }
 
 // ===============================
@@ -101,6 +104,19 @@ function submitFeedback() {
   openConfirm();
 }
 
+function clearMood() {
+  document.body.classList.remove("mood-1","mood-2","mood-3","mood-4","mood-5");
+  const loader = document.getElementById("loader");
+  if (loader) loader.classList.remove("mood-1","mood-2","mood-3","mood-4","mood-5");
+}
+function applyMood(mood) {
+  const moodClass = `mood-${mood}`;
+  clearMood();
+  document.body.classList.add(moodClass);
+  const loader = document.getElementById("loader");
+  if (loader) loader.classList.add(moodClass);
+}
+
 function openConfirm() {
   document.getElementById("confirm-overlay").classList.add("active");
 }
@@ -144,9 +160,18 @@ document.addEventListener("DOMContentLoaded", () => {
       const button = document.getElementById("back-btn");
       const loader = document.getElementById("loader");
 
+      applyMood(selectedEmoji || "3");
+
       loader.style.display = "block";
       title.textContent = "Feedback wird verarbeitet …";
-      text.textContent = "Bitte einen Moment Geduld";
+      const moodTexts = {
+        "1": "Bitte einen Moment Geduld – wir hören zu 👂",
+        "2": "Bitte einen Moment Geduld – sorgfältige Prüfung 🤔",
+        "3": "Bitte einen Moment Geduld",
+        "4": "Bitte einen Moment Geduld – positive Energie 💃",
+        "5": "Bitte einen Moment Geduld – Begeisterung 🚀"
+      };
+      text.textContent = moodTexts[String(selectedEmoji)] || moodTexts["3"];
       button.classList.add("hidden");
 
       setTimeout(() => {
@@ -154,6 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
         title.textContent = "Vielen Dank für dein Feedback ✓";
         text.textContent = "Deine Rückmeldung wurde erfolgreich gespeichert.";
         button.classList.remove("hidden");
+        clearMood();
       }, 5000);
     });
   }
