@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         loader.style.display = "none";
         title.textContent = "Vielen Dank für dein Feedback ✓";
-        text.textContent = "Deine Rückmeldung wurde erfolgreich gespeichert.";
+        text.textContent = "Dein Feedback wurde erfolgreich und anonym gespeichert.";
         button.classList.remove("hidden");
         clearMood();
       }, 5000);
