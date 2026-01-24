@@ -153,7 +153,33 @@
             <p class="hint">Zum Vergrößern klicken</p>
         </div>
 
+        <h3>Vergangende Vorlesungsbewertungen:</h3>
+        <div id="lecture-list" class="lecture-list"></div>
+
         <button onclick="showStart()">Session beenden</button>
+    </main>
+
+        <!-- ================= VORLESUNG-DETAILSEITE ================= -->
+    <main id="lecture-detail" class="hidden">
+        <h2 id="lecture-title">Vorlesung – Details</h2>
+        <p class="privacy-note">Aggregierte, anonyme Feedbacks zur ausgewählten Vorlesung.</p>
+
+        <div class="card chart-card">
+            <h3>Bewertung Skala 1–5 (A)</h3>
+            <canvas id="lectureScaleA" width="200" height="150"></canvas>
+        </div>
+        <div class="card chart-card">
+            <h3>Bewertung Skala 1–5 (B)</h3>
+            <canvas id="lectureScaleB" width="200" height="150"></canvas>
+        </div>
+        <div class="card chart-card">
+            <h3>Emoji‑Feedback</h3>
+            <canvas id="lectureEmoji" width="200" height="150"></canvas>
+        </div>
+
+        <div class="button-group">
+            <button id="back-to-dashboard" onclick="backToDashboard()">Zurück zum Live‑Dashboard</button>
+        </div>
     </main>
 
     <div id="chart-overlay" class="hidden">
@@ -192,6 +218,16 @@
                 <button id="confirm-send">Endgültig absenden</button>
             </div>
             <p class="privacy-note">Dein Feedback bleibt anonym. Es werden keine personenbezogenen Daten übertragen.</p>
+        </div>
+    </div>
+
+    <div id="lecture-overlay" class="hidden">
+        <div class="overlay-content">
+            <button class="close-btn" onclick="closeLectureOverlay()">✕</button>
+            <h2 id="lecture-title">Vorlesung – Details</h2>
+            <canvas id="lectureScaleA"></canvas>
+            <canvas id="lectureScaleB"></canvas>
+            <canvas id="lectureEmoji"></canvas>
         </div>
     </div>
 

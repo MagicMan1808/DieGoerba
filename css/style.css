@@ -129,6 +129,47 @@ button:hover {
     font-size: 0.95rem;
 }
 
+/* Vorlesungsübersicht */
+.lecture-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0 1.5rem;
+}
+.lecture-item {
+    background: #f0f4f8;
+    border: 1px solid #e3e9ef;
+    border-radius: 8px;
+    padding: 0.9rem;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+.lecture-item:hover { background: #e9f1f7; transform: translateY(-1px); }
+.lecture-item h4 { margin-bottom: 0.35rem; font-size: 1rem; color: #2c3e50; }
+.lecture-meta { font-size: 0.85rem; color: #65768a; margin-bottom: 0.4rem; }
+.lecture-avg { font-weight: bold; color: #2c3e50; }
+
+/* Overlay um Lecture ergänzen */
+#chart-overlay,
+#scale-chart-overlay,
+#scale-chart-overlay-b,
+#lecture-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+#chart-overlay.active,
+#scale-chart-overlay.active,
+#scale-chart-overlay-b.active,
+#lecture-overlay.active {
+    display: flex;
+}
+
 /* Dashboard Hilfe */
 .help-section {
     margin: 1rem 0;
